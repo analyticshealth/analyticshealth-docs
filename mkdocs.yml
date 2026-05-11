@@ -1,19 +1,30 @@
-site_name: AnalyticsHealth Docs
-site_url: https://analyticshealth.github.io/analyticshealth-docs/
+site_name: AnalyticsHealth – Architecture Docs
+site_description: Technical architecture documentation for the AnalyticsHealth platform
+site_author: Lucas Maistro
+
 theme:
-  name: mkdocs
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+    accent: lime
+  features:
+    - navigation.instant
+    - navigation.sections
+    - content.code.copy
+
 nav:
   - Home: index.md
   - Vision: vision.md
-  - Roadmap: roadmap.md
   - Architecture:
       - Overview: architecture/overview.md
       - Ingestion: architecture/ingestion.md
       - Data Lake: architecture/data-lake.md
-      - RAG Bedrock: architecture/rag-bedrock.md
-      - Security Multitenant: architecture/security-multitenant.md
+      - RAG & Bedrock: architecture/rag-bedrock.md
+      - Multi-Tenant Security: architecture/security-multitenant.md
   - Cost:
       - Baseline: cost/baseline.md
       - Scaling: cost/scaling.md
   - Decisions:
-      - ADR-0001 PgVector vs OpenSearch: decisions/adr-0001-pgvector-vs-opensearch.md
+      - ADR 0001 – Vector Store: decisions/adr-0001-pgvector-vs-opensearch.md
+  - Roadmap: roadmap.md

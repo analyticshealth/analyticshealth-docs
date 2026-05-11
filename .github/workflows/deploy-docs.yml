@@ -21,8 +21,8 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install MkDocs
-        run: pip install mkdocs==1.6.1
+      - name: Install MkDocs and Material Theme
+        run: pip install mkdocs==1.6.1 mkdocs-material
 
       - name: Deploy to gh-pages
         run: mkdocs gh-deploy --force

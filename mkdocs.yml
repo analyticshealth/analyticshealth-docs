@@ -1,0 +1,19 @@
+site_name: AnalyticsHealth Docs
+site_url: https://analyticshealth.github.io/analyticshealth-docs/
+theme:
+  name: mkdocs
+nav:
+  - Home: index.md
+  - Vision: vision.md
+  - Roadmap: roadmap.md
+  - Architecture:
+      - Overview: architecture/overview.md
+      - Ingestion: architecture/ingestion.md
+      - Data Lake: architecture/data-lake.md
+      - RAG Bedrock: architecture/rag-bedrock.md
+      - Security Multitenant: architecture/security-multitenant.md
+  - Cost:
+      - Baseline: cost/baseline.md
+      - Scaling: cost/scaling.md
+  - Decisions:
+      - ADR-0001 PgVector vs OpenSearch: decisions/adr-0001-pgvector-vs-opensearch.md

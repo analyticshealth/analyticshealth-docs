@@ -8,7 +8,7 @@
 - Consider:
   - Consolidation frequency tuning
   - Smaller context windows
-  - Model fallback (Claude Haiku)
+  - Token budget controls per user
 
 ## Design Choice
 Optimise for **idle cost**, not peak throughput.

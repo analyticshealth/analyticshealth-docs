@@ -20,3 +20,14 @@ This documentation focuses on the **technical architecture**, trade-offs and des
 - ✅ Low idle cost
 - ✅ Data quality > data volume
 - ✅ Simplicity over premature optimisation
+
+## Implementation Status
+
+| Phase | Status | Description |
+|---|---|---|
+| 0 — Infrastructure | ✅ Done | CDK stacks: storage (S3 + DynamoDB + Aurora + KMS), API (Cognito), OIDC, ingestion skeleton |
+| 1 — Initial Load | ✅ Done | Local script to load full Garmin export history → S3 + DynamoDB idempotency |
+| 2 — Lambda Ingestion | 🔲 Next | `fetch_garmin`, `ocr_weight`, `manual_ingest` Lambdas |
+| 3 — Step Functions | 🔲 Planned | Real state machine with retry, DLQ, observability |
+| 4 — Consolidator + Bedrock | 🔲 Planned | RAG pipeline: consolidate → embed → chat |
+| 5 — Hardening | 🔲 Planned | Structured logs, X-Ray, CloudWatch alarms, cost controls |

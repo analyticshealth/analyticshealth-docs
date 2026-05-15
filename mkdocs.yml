@@ -27,4 +27,7 @@ nav:
       - Scaling: cost/scaling.md
   - Decisions:
       - ADR 0001 – Vector Store: decisions/adr-0001-pgvector-vs-opensearch.md
+      - ADR 0002 – Region: decisions/adr-0002-region-eu-west-1.md
+      - ADR 0003 – LLM Model: decisions/adr-0003-llm-claude-sonnet.md
+      - ADR 0004 – No Fallback: decisions/adr-0004-no-model-fallback.md
   - Roadmap: roadmap.md

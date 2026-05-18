@@ -39,21 +39,26 @@ python -m initial_load.run_initial_load \
 
 - **Trigger**: EventBridge Schedule → Step Functions → `fetch_garmin` Lambda (06:00 UTC)
 - **Data**: D-1 for all 6 data types via Garmin Connect API
-- **Auth**: credentials from Secrets Manager (per-user)
+- **Auth**: credentials from Secrets Manager (per-user), never in env vars
 - **Idempotency**: same `ingestion_control` table, source key `garmin_api#{data_type}#{date}`
-- **Resilience**: Step Functions retry with exponential backoff; failed executions sent to SQS DLQ *(Phase 3)*
+- **Retry**: exponential backoff (2ˣ seconds) for connection errors; 60s sleep on rate-limit (`GarminConnectTooManyRequestsError`)
+- **Error isolation**: all 6 data types are attempted independently — a failure on `sleep` does not block `metrics` or `biometrics`. All failures are collected and a single error is raised at the end so Step Functions retries with idempotency.
+- **Resilience**: failed executions sent to SQS DLQ *(Phase 3)*
 
 ## Body Composition OCR (image-based)
 
 - **Trigger**: S3 PUT on `temp-uploads/{user_id}/weight/*.jpg`
-- **Pipeline**: S3 event → `ocr_weight` Lambda → Textract `DetectDocumentText` → parse → validate ranges → write `biometrics` to `raw/weight/{user_id}/` → **delete source image**
+- **Pipeline**: S3 event → `ocr_weight` Lambda → Textract `DetectDocumentText` → regex parse → physiological range validation → write `biometrics` to `raw/weight/{user_id}/` → **delete source image** (in `finally` block)
+- **Date**: resolved in user's local timezone (`Europe/Lisbon`), not UTC — avoids off-by-one at midnight
 - **Image retention**: never persists beyond processing. Lifecycle rule expires `temp-uploads/` after 1 day as safety net.
+- **Partial results**: weight is required (raises `ValueError` if missing); all other fields are optional
 
 ## Manual Training Input
 
-- **Endpoint**: `POST /ingest/{data_type}` with Cognito JWT
-- **Supported types**: any valid `data_type` (e.g. `activities` for jiu-jitsu, mobility)
-- **Validation**: schema checked in Lambda before writing to `raw/manual/{user_id}/`
+- **Endpoint**: `POST /ingest/manual` with Cognito JWT
+- **Fields**: `date` (required), `modality` (required), `duration_minutes` (required), `rpe` 1–10 (optional), `notes` max 2000 chars (optional)
+- **Multiple workouts per day**: each entry gets a UUID suffix — `raw/manual/{user_id}/YYYY/MM/DD/{entry_id}.json` — so two jiu-jitsu sessions on the same day are stored independently
+- **Validation**: schema checked in Lambda; returns `400` with field-level error list on failure
 
 ## Canonical Record Schema
 

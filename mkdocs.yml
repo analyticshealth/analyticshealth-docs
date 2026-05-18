@@ -22,6 +22,7 @@ nav:
       - Data Lake: architecture/data-lake.md
       - RAG & Bedrock: architecture/rag-bedrock.md
       - Multi-Tenant Security: architecture/security-multitenant.md
+      - Gotchas: architecture/gotchas.md
   - Cost:
       - Baseline: cost/baseline.md
       - Scaling: cost/scaling.md
@@ -30,4 +31,5 @@ nav:
       - ADR 0002 – Region: decisions/adr-0002-region-eu-west-1.md
       - ADR 0003 – LLM Model: decisions/adr-0003-llm-claude-sonnet.md
       - ADR 0004 – No Fallback: decisions/adr-0004-no-model-fallback.md
+      - ADR 0005 – RDS Provisioned vs Aurora: decisions/adr-0005-rds-provisioned-vs-aurora.md
   - Roadmap: roadmap.md

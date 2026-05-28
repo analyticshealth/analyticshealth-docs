@@ -77,3 +77,29 @@ For the current state of the project (Phase 4 not yet implemented, no embeddings
 - Sustained chat traffic >100 requests/day (cold-start cost outweighs idle savings)
 - Multi-user onboarding crossing 10 active users (single-AZ no longer acceptable)
 - Cost of `t4g.medium` always-on approaches Aurora Serverless v2 steady-state cost
+
+---
+
+## Addendum — Instance Destroyed (2026-05-28)
+
+The RDS `db.t4g.micro` instance provisioned under this ADR was **manually destroyed** during Phase 2/3 development to eliminate the ~$2/month storage cost during a period with no chat usage and no pgvector embeddings stored.
+
+The CDK `StorageStack` no longer provisions any RDS resource. The `AiStack` retains the VPC reference for when Phase 4 requires a database.
+
+### State as of 2026-05-28
+
+| Component | State |
+|---|---|
+| RDS instance | Destroyed |
+| VPC (PRIVATE_ISOLATED subnets) | Deployed — ready for reuse |
+| `StorageStack` RDS block | Removed from CDK code |
+| pgvector embeddings | None stored (Phase 4 not started) |
+
+### Re-provisioning for Phase 4
+
+When Phase 4 (Bedrock KB) begins, a new RDS instance must be provisioned. The options remain as described in this ADR. The cheapest and simplest path is to re-add the `DatabaseInstance` block to `StorageStack` and pass it to `AiStack`.
+
+The decision of whether to use RDS Provisioned again or revisit Aurora Serverless v2 / an alternative vector store should be re-evaluated at that time. Key inputs:
+- Aurora Serverless v2 minimum capacity pricing may have changed
+- Bedrock Knowledge Base native vector store options (if any) should be checked
+- Pinecone or Weaviate free tiers may now be viable if AWS-only is not a requirement

@@ -20,12 +20,12 @@ The documentation is published using **MkDocs + GitHub Pages**.
 - No dashboards — insights delivered in natural language
 
 ## Tech Stack (High Level)
-- AWS Lambda, Step Functions, API Gateway
-- Amazon S3 (data lake)
-- DynamoDB (control plane)
-- Amazon Bedrock (Claude 3.5 Sonnet)
-- Aurora Serverless v2 (PostgreSQL + pgvector)
-- Amazon Cognito
-- AWS CDK (Python)
+- AWS Lambda, Step Functions, EventBridge, SQS
+- Amazon S3 (data lake), DynamoDB (control plane)
+- Amazon API Gateway, Amazon Cognito
+- Amazon Bedrock (Claude 3.5 Sonnet + Knowledge Base)
+- RDS PostgreSQL + pgvector (Phase 4)
+- Amazon Textract (OCR pipeline)
+- AWS CDK (TypeScript) + AWS SAM
 
 > This repository intentionally contains **no application code**.

@@ -5,7 +5,7 @@ AnalyticsHealth follows a **layered, event-driven architecture** optimised for l
 ## Deployment
 
 - **Region**: `eu-west-1` (Ireland) — see [ADR-0002](../decisions/adr-0002-region-eu-west-1.md)
-- **IaC**: AWS CDK (Python for Lambdas, TypeScript for infrastructure stacks)
+- **IaC**: AWS CDK (TypeScript) for infrastructure stacks; AWS SAM for Lambda deployment
 - **CI/CD**: GitHub Actions with OIDC (no long-lived credentials)
 - **Account model**: single AWS account, `dev` and `prod` separated by stack suffixes
 
@@ -27,7 +27,7 @@ AnalyticsHealth follows a **layered, event-driven architecture** optimised for l
 | Amazon S3 | Single data lake bucket with prefix-based zones |
 | Amazon DynamoDB | Users, sessions (TTL 90d), ingestion idempotency control |
 | Amazon Bedrock | Knowledge Base + Claude 3.5 Sonnet (see [ADR-0003](../decisions/adr-0003-llm-claude-sonnet.md)) |
-| Amazon RDS PostgreSQL | pgvector vector store on `db.t4g.micro` — stoppable (see [ADR-0005](../decisions/adr-0005-rds-provisioned-vs-aurora.md)) |
+| Amazon RDS PostgreSQL | pgvector vector store — to be re-provisioned for Phase 4 (see [ADR-0005](../decisions/adr-0005-rds-provisioned-vs-aurora.md)) |
 | Amazon Cognito | User Pool — JWT-based auth for all API endpoints |
 | Amazon API Gateway | REST API with Cognito authorizer |
 | AWS KMS | CMK for S3, DynamoDB, RDS and Secrets encryption |
@@ -60,5 +60,5 @@ All endpoints require a valid Cognito JWT; `user_id` is **always** extracted fro
 - Stateless compute — all state in S3 / DynamoDB / RDS
 - Explicit data ownership by `user_id` at every layer
 - Idempotent ingestion — DynamoDB `ingestion_control` is the source of truth
-- Pay-per-use everywhere; the only always-on resource (RDS) is stoppable during development
+- Pay-per-use everywhere; no always-on compute during development (RDS destroyed until Phase 4)
 - Defense-in-depth for multi-tenant isolation — S3 prefix + DynamoDB partition + KB metadata filter + JWT-only `user_id`

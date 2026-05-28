@@ -43,7 +43,7 @@ python -m initial_load.run_initial_load \
 - **Idempotency**: same `ingestion_control` table, source key `garmin_api#{data_type}#{date}`
 - **Retry**: exponential backoff (2ˣ seconds) for connection errors; 60s sleep on rate-limit (`GarminConnectTooManyRequestsError`)
 - **Error isolation**: all 6 data types are attempted independently — a failure on `sleep` does not block `metrics` or `biometrics`. All failures are collected and a single error is raised at the end so Step Functions retries with idempotency.
-- **Resilience**: failed executions sent to SQS DLQ *(Phase 3)*
+- **Resilience**: failed executions sent to SQS DLQ (deployed in `analyticshealth-infra-ingestion` CDK stack)
 
 ## Body Composition OCR (image-based)
 

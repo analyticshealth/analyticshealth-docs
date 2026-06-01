@@ -14,7 +14,6 @@ Instead of dashboards, charts or metrics overload, the platform focuses on **con
 
 ## Target Evolution
 - Today: single user (personal use)
-- 6 months: 10–50 users
-- 12+ months: hundreds of users
+- 6 months: 2-10 users (family and friends)
 
 The architecture is designed to scale **organisationally and technically** without major refactors.

@@ -30,6 +30,7 @@ extra_javascript:
 
 nav:
   - Home: index.md
+  - Produto & Objetivos: product.md
   - Vision: vision.md
   - Architecture:
       - Overview: architecture/overview.md

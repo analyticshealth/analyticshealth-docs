@@ -1,6 +1,6 @@
 # Architecture Diagrams
 
-Sólido = implementado. Tracejado = Phase 4 (planejado).
+Solid = implemented. Dashed = Phase 4 (planned).
 
 ---
 

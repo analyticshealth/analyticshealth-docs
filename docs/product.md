@@ -105,13 +105,31 @@ That constraint is a feature: it lets the product stay opinionated, private and 
 
 ## The project behind the product
 
-AnalyticsHealth is also a **learning vehicle**. I'm a [solutions architect](https://www.linkedin.com/in/lucassimoes/) with a deep athletic background (jiu-jitsu black belt, marathoner, multi-sport for life) and I'm building Ana to develop hands-on expertise in three things at once:
+AnalyticsHealth is also a **learning vehicle** — a way to develop hands-on expertise in applied AI on top of the AWS foundations I work with every day.
+
+### Built by
+
+[Lucas Simões Maistro](https://www.linkedin.com/in/lucassimoes/){target="_blank" rel="noopener"} — Solutions Architect at Volkswagen Digital Solutions, based in Cascais (Lisbon). 25+ years in software engineering and architecture, 15+ years teaching software engineering at university level (which is why the docs read the way they do).
+
+- AWS Certified Solutions Architect — Professional (2025)
+- AWS Certified Data Engineer — Associate (2025)
+- AWS Certified DevOps Engineer — Professional (2023)
+- Azure Solutions Architect Expert (2023)
+- [GitHub](https://github.com/lucassimoesmaistro){target="_blank" rel="noopener"}
+
+Background: jiu-jitsu black belt, marathoner, multi-sport for life. Ana is built on the data that comes from all of that.
+
+The name **Ana** is a tribute to my wife, [**Ana Paula**](https://www.linkedin.com/in/anapaulamoraissilva/){target="_blank" rel="noopener"} — and a natural acronym of **Ana**lyticsHealth.
+
+### Why this matters
+
+Three things I'm developing on this project at once:
 
 - **Applied AI** — a real RAG pipeline on Amazon Bedrock, with Claude as the reasoning engine
 - **Production-grade AWS architecture** — 100% IaC (CDK + SAM), GitHub OIDC, Landing Zone with SSO, Well-Architected from day one
 - **A real product with real data** — years of my own Garmin history, my own weight measurements, my own training. No synthetic datasets, no toy problems.
 
-The name **Ana** is a tribute to my wife, [**Ana Paula**](https://www.linkedin.com/in/anapaulamoraissilva/) — and a natural acronym of **Ana**lyticsHealth.
+In my day job I led an architecture redesign that took a data ingestion pipeline from **17 days to 9 hours** and cut its cost by **83%**. The same instinct — *idle cost should be zero, real cost should be justified* — drives every decision in Ana.
 
 ---
 

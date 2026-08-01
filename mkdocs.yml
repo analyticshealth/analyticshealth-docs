@@ -51,4 +51,5 @@ nav:
       - ADR 0004 – No Fallback: decisions/adr-0004-no-model-fallback.md
       - ADR 0005 – RDS vs Aurora: decisions/adr-0005-rds-provisioned-vs-aurora.md
       - ADR 0006 – SAM vs CDK for Lambdas: decisions/adr-0006-sam-vs-cdk-for-lambdas.md
+      - ADR 0007 – Garmin Ingestion Unviable: decisions/adr-0007-garmin-ingestion-unviable.md
   - Roadmap: roadmap.md
